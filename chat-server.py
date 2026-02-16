@@ -87,17 +87,27 @@ SONNET_OUTPUT_COST = 15.00  # $15 per 1M output tokens
 MEMORY_DIR = "/Users/denisem/.openclaw/workspace/memory"
 os.makedirs(MEMORY_DIR, exist_ok=True)
 
+@app.route('/health')
+def health():
+    """Health check endpoint"""
+    return jsonify({'status': 'ok', 'service': 'petit-panthere'})
+
 @app.route('/')
 def index():
     """Serve the chat interface"""
-    try:
+    import os
+    cwd = os.getcwd()
+    files = os.listdir('.')
+    
+    if 'chat.html' in files:
         return send_from_directory('.', 'chat.html')
-    except Exception as e:
+    else:
         return f"""
-        <h1>Petit Panthère 🐾</h1>
-        <p>Server is running but chat.html not found!</p>
-        <p>Error: {str(e)}</p>
-        <p>Try: <a href="/chat.html">chat.html</a></p>
+        <h1>🐾 Petit Panthère is Running!</h1>
+        <p>Server started successfully but chat.html not found in deployment.</p>
+        <p>Current directory: {cwd}</p>
+        <p>Files: {', '.join(files[:20])}</p>
+        <p><a href="/health">Health Check</a></p>
         """
 
 @app.route('/icon.png')
