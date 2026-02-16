@@ -90,7 +90,15 @@ os.makedirs(MEMORY_DIR, exist_ok=True)
 @app.route('/')
 def index():
     """Serve the chat interface"""
-    return send_from_directory('.', 'chat.html')
+    try:
+        return send_from_directory('.', 'chat.html')
+    except Exception as e:
+        return f"""
+        <h1>Petit Panthère 🐾</h1>
+        <p>Server is running but chat.html not found!</p>
+        <p>Error: {str(e)}</p>
+        <p>Try: <a href="/chat.html">chat.html</a></p>
+        """
 
 @app.route('/icon.png')
 def icon():
