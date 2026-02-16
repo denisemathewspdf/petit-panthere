@@ -1,0 +1,16 @@
+# Petit Panthère — Python Dependencies
+
+# Slack SDK (interface layer)
+slack-sdk==3.26.2
+
+# Anthropic SDK (intelligence layer)
+anthropic==0.18.1
+
+# Environment variables
+python-dotenv==1.0.1
+
+# Future dependencies (not needed for basic demo):
+# fastapi==0.109.0  # Backend orchestration
+# uvicorn==0.27.0   # ASGI server
+# sqlalchemy==2.0.25  # Database ORM
+# apscheduler==3.10.4  # Scheduling
